@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSP — بوابة تسوية رأس المال</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SCREEN 1: LOGIN -->
+<div id="screen-login" class="screen active">
+  <div class="login-split">
+    <!-- Image Side -->
+    <div class="login-image">
+      <div class="login-image-overlay">
+        <div class="login-image-content">
+          <div class="logo-icon-large">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--gold)" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h2>منصة CSP   </h2>
+          <p>منصة إلكترونية متطورة لإدارة طلبات التسوية واعتماد مجالس الإدارة بالتعاون مع مصر المقاصة لضمان بيئة استثمارية آمنة وموثوقة.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Form Side -->
+    <div class="login-form-side">
+      <div class="login-card">
+        <div class="login-logo">
+          <h1>تسجيل الدخول</h1>
+          <p>مرحباً بك في البوابة الإلكترونية</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="login-role-tabs">
+          <button class="login-role-tab active" data-role="investor">مستثمر</button>
+          <button class="login-role-tab" data-role="employee">موظف المقاصة</button>
+        </div>
+
+        <!-- Form -->
+        <form id="login-form">
+          <div class="form-group">
+            <label>اسم المستخدم</label>
+            <div class="input-wrapper">
+              <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+              <input type="text" class="form-control" id="login-username" placeholder="أدخل اسم المستخدم" required>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 32px;">
+            <label>كلمة المرور</label>
+            <div class="input-wrapper">
+              <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <input type="password" class="form-control" id="login-password" placeholder="أدخل كلمة المرور" value="123456" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="gap: 12px;">تسجيل الدخول <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(180deg);"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP LAYOUT -->
+<div id="app-layout" class="app-layout hidden">
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.83 3.41L12 10.98 5.17 7.59 12 4.18zM4 8.98l7 3.5v6.55l-7-3.5V8.98zm9 10.05v-6.55l7-3.5v6.55l-7 3.5z"/></svg></div>
+      <h2>CSP — تسوية رأس المال</h2>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-user">
+        <div class="user-info">
+          <div class="user-name" id="nav-user-name">مستخدم</div>
+          <div class="user-role" id="nav-user-role">مستثمر</div>
+        </div>
+        <div class="user-avatar" id="nav-user-avatar">م</div>
+      </div>
+      <button class="btn btn-outline btn-sm" id="logout-btn">خروج</button>
+    </div>
+  </nav>
+
+  <div class="app-body">
+    <!-- Sidebar for Investor -->
+    <aside class="sidebar" id="investor-sidebar">
+      <div class="vertical-tabs" id="investor-steps">
+        <div class="vertical-tab active" data-target="screen-company" id="step-company">
+          <span class="tab-icon">١</span>
+          <span class="tab-label">بيانات الشركة</span>
+        </div>
+        <div class="vertical-tab" data-target="screen-settlement" id="step-settlement">
+          <span class="tab-icon">٢</span>
+          <span class="tab-label">طلب التسوية</span>
+        </div>
+        <div class="vertical-tab" data-target="screen-followup" id="step-followup">
+          <span class="tab-icon">٣</span>
+          <span class="tab-label">متابعة الطلب</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar for Employee -->
+    <aside class="sidebar hidden" id="employee-sidebar">
+      <div class="vertical-tabs">
+        <div class="vertical-tab active">
+          <span class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <span class="tab-label">مراجعة طلب تسوية</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- SCREEN 2: COMPANY DATA -->
+      <div id="screen-company" class="screen active">
+        <div class="page-header">
+          <h1>بيانات الشركة</h1>
+          <p>عرض وفحص بيانات الشركة المسجلة في الهيئة العامة للاستثمار (GAFI)</p>
+        </div>
+        <div class="horizontal-tabs" id="comp-tabs-nav" style="margin-bottom: 24px;">
+          <button class="h-tab active" data-tab="comp-data">بيانات الشركة</button>
+          <button class="h-tab" data-tab="comp-delegate">بيانات المفوض</button>
+        </div>
+
+        <div id="comp-tabs-content">
+          <!-- Company Data Tab -->
+          <div class="tab-content-panel active" id="comp-data">
+            <div class="card mb-24">
+              <div class="card-header">
+                <h3><span class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span>معلومات الشركة الأساسية</h3>
+                <span class="badge badge-info">GAFI</span>
+              </div>
+              <div class="card-body">
+                <div class="field-grid">
+                  <div class="field-item"><span class="field-label">اسم الشركة</span><div class="field-value">شركة النور للاستثمارات</div></div>
+                  <div class="field-item"><span class="field-label">الشكل القانوني</span><div class="field-value">شركة مساهمة مصرية</div></div>
+                  <div class="field-item"><span class="field-label">رأس المال</span><div class="field-value">٥٠,٠٠٠,٠٠٠ جنيه</div></div>
+                  <div class="field-item"><span class="field-label">الرقم الضريبى</span><div class="field-value">٢٤٥-٣٩٢-١٠٢</div></div>
+                  <div class="field-item"><span class="field-label">العنوان</span><div class="field-value">١٢ شارع التحرير، القاهرة</div></div>
+                  <div class="field-item"><span class="field-label">النشاط</span><div class="field-value">تطوير عمراني</div></div>
+                  <div class="field-item"><span class="field-label">وضع الشركة</span><div class="field-value"><span class="badge badge-success">نشطة</span></div></div>
+                </div>
+                <div class="divider"></div>
+                <div class="section-title">المستندات</div>
+                <div class="field-grid">
+                  <div class="field-item">
+                    <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">عقد الشركة</span></span></label>
+                  </div>
+                  <div class="field-item">
+                    <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">التعديلات على الشركة</span></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delegate Data Tab -->
+          <div class="tab-content-panel" id="comp-delegate">
+            <div class="card mb-24">
+              <div class="card-header">
+                <h3><span class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>بيانات المفوض</h3>
+                <span class="badge badge-primary">EF - CSP</span>
+              </div>
+              <div class="card-body">
+                <div class="field-grid">
+                  <div class="field-item"><span class="field-label">نوع التفويض</span><div class="field-value text-primary">تفويض للتعامل مع المقاصة</div></div>
+                  <div class="field-item"><span class="field-label">اسم المفوض</span><div class="field-value">أحمد محمد عبد الرحمن</div></div>
+                  <div class="field-item"><span class="field-label">الصفة</span><div class="field-value">مفوض</div></div>
+                  <div class="field-item"><span class="field-label">نوع إثبات الشخصية</span><div class="field-value">بطاقة رقم قومي</div></div>
+                  <div class="field-item"><span class="field-label">رقم البطاقة / جواز السفر</span><div class="field-value">٢٨٥٠١١٢٣٤٠٠٥٧٣</div></div>
+                  <div class="field-item"><span class="field-label">تليفون مقدم الطلب</span><div class="field-value">٠١٠١٢٣٤٥٦٧٨</div></div>
+                </div>
+                <div class="divider"></div>
+                <div class="section-title">المرفقات الخاصة بالمفوض</div>
+                <div class="field-grid">
+                  <div class="field-item">
+                    <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">تحقيق الشخصية (صورة الرقم القومي)</span></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-24">
+          <div class="card-body text-center">
+            <div id="check-result" class="hidden" style="margin-bottom:16px;"></div>
+            <button class="btn btn-primary btn-lg" id="btn-check-company">فحص البيانات</button>
+            <button class="btn btn-gold btn-lg hidden" id="btn-goto-settlement-from-company">التالي — طلب التسوية</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: SETTLEMENT REQUEST -->
+      <div id="screen-settlement" class="screen">
+        <div class="page-header">
+          <h1>بيانات طلب التسوية</h1>
+          <p>أرفق مستندات الزيادة، يمكنك إضافة أكثر من زيادة على شكل تابات.</p>
+        </div>
+        <div class="card mb-24">
+          <div class="card-body" style="padding: 16px 24px;">
+            <!-- Horizontal Tabs for Increases -->
+            <div class="horizontal-tabs" id="increase-tabs-nav">
+              <button class="h-tab active" data-tab="inc-1">زيادة ١ (الأقدم)</button>
+              <button class="h-tab-add" id="btn-add-increase">+ زيادة أخرى</button>
+            </div>
+            
+            <div id="increase-tabs-content">
+              <!-- Tab 1 -->
+              <div class="tab-content-panel active" id="inc-1">
+                <div class="field-grid mb-24">
+                  <div class="field-item">
+                    <span class="field-label">طريقة الزيادة</span>
+                    <select class="form-control">
+                      <option value="" disabled selected>اختر طريقة الزيادة</option>
+                      <option>أرباح مرحلة</option>
+                      <option>حصص عينية</option>
+                      <option>زيادة نقدية</option>
+                      <option>احتياطي</option>
+                    </select>
+                  </div>
+                  <div class="field-item">
+                    <span class="field-label">قيمة الزيادة</span>
+                    <input type="text" class="form-control" placeholder="أدخل قيمة الزيادة (بالجنيه)">
+                  </div>
+                  <div class="field-item">
+                    <span class="field-label">قيمة رأس المال بعد الزيادة</span>
+                    <input type="text" class="form-control" placeholder="أدخل قيمة رأس المال بعد الزيادة (بالجنيه)">
+                  </div>
+                </div>
+                <div class="section-title">المرفقات المطلوبة</div>
+                <div class="field-grid mb-24">
+                  <label class="attachment-field"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">محضر الجمعية</span></span></label>
+                  <label class="attachment-field"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">العقد المعدل</span></span></label>
+                  <label class="attachment-field"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">خطاب الرقابة المالية بالزيادة</span></span></label>
+                  <label class="attachment-field"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">طلب قيد الزيادة</span></span></label>
+                  <label class="attachment-field"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">السجل التجاري</span></span></label>
+                  <label class="attachment-field"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">الشهادة البنكية</span></span></label>
+                </div>
+                <div class="divider"></div>
+                <div class="section-title">بيانات المساهمين (من GAFI)</div>
+                <div class="table-responsive" style="overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+                  <table class="table" style="width: 100%; text-align: right; border-collapse: collapse; font-family: 'Tajawal', sans-serif;">
+                    <thead style="background: rgba(17, 42, 70, 0.04); color: var(--text-muted); font-weight: 800; font-size: 0.875rem;">
+                      <tr>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">اسم المساهم</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">الجنسية</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">عدد الأسهم</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">نسبة المساهمة</th>
+                      </tr>
+                    </thead>
+                    <tbody style="font-size: 0.9375rem; font-weight: 600; color: var(--text);">
+                      <tr style="border-bottom: 1px solid var(--border-light);">
+                        <td style="padding: 16px;">أحمد عبد الرحمن سالم</td>
+                        <td style="padding: 16px;">مصري</td>
+                        <td style="padding: 16px;">٥٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-success">٢٥٪</span></td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid var(--border-light); background: rgba(17, 42, 70, 0.01);">
+                        <td style="padding: 16px;">شركة مجموعة الاستثمارات الكبرى</td>
+                        <td style="padding: 16px;">سعودي</td>
+                        <td style="padding: 16px;">١,٠٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-primary">٥٠٪</span></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 16px;">منى محمود علي</td>
+                        <td style="padding: 16px;">مصري</td>
+                        <td style="padding: 16px;">٥٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-warning">٢٥٪</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-outline" id="btn-back-company-from-settlement">رجوع</button>
+          <button class="btn btn-success" id="btn-submit-settlement">تقديم الطلب</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 5: FOLLOW UP -->
+      <div id="screen-followup" class="screen">
+        <div class="page-header">
+          <h1>متابعة الطلب</h1>
+          <p>حالة طلب تسوية رأس المال والملاحظات</p>
+        </div>
+        <div class="card mb-24">
+          <div class="card-body">
+            <div class="field-grid">
+              <div class="field-item"><span class="field-label">الرسوم</span><div class="field-value">٥,٠٠٠ جنيه</div></div>
+              <div class="field-item"><span class="field-label">حالة الطلب</span><div class="field-value"><span class="badge badge-warning">قيد المراجعة</span></div></div>
+              <div class="field-item full-width"><span class="field-label">ملاحظات المراجع</span><div class="field-value">في انتظار المراجعة...</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="action-bar"><button class="btn btn-outline" onclick="navigateTo('screen-company')">الرئيسية</button></div>
+      </div>
+
+      <!-- SCREEN 6: EMPLOYEE REVIEW -->
+      <div id="screen-employee" class="screen">
+        <div class="page-header">
+          <h1>مراجعة طلب تسوية رأس المال</h1>
+          <p>مراجعة واعتماد طلب تسوية رأس المال — موظف مصر المقاصة</p>
+        </div>
+
+        <div class="horizontal-tabs" id="emp-comp-tabs-nav" style="margin-bottom: 24px;">
+          <button class="h-tab active" data-tab="emp-comp-data">بيانات الشركة</button>
+          <button class="h-tab" data-tab="emp-comp-delegate">بيانات المفوض</button>
+        </div>
+
+        <div id="emp-comp-tabs-content">
+          <!-- Company Data Tab (Employee) -->
+          <div class="tab-content-panel active" id="emp-comp-data">
+            <div class="card mb-24">
+              <div class="card-header">
+                <h3><span class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span>معلومات الشركة الأساسية</h3>
+                <span class="badge badge-info">GAFI</span>
+              </div>
+              <div class="card-body">
+                <div class="field-grid">
+                  <div class="field-item"><span class="field-label">اسم الشركة</span><div class="field-value">شركة النور للاستثمارات</div></div>
+                  <div class="field-item"><span class="field-label">الشكل القانوني للشركة</span><div class="field-value">شركة مساهمة مصرية</div></div>
+                  <div class="field-item"><span class="field-label">رأس المال</span><div class="field-value">٥٠,٠٠٠,٠٠٠ جنيه</div></div>
+                  <div class="field-item"><span class="field-label">العنوان</span><div class="field-value">١٢ شارع التحرير، القاهرة</div></div>
+                  <div class="field-item"><span class="field-label">تاريخ التأسيس</span><div class="field-value">١٥ مارس ٢٠١٥</div></div>
+                  <div class="field-item"><span class="field-label">كود الشركة</span><div class="field-value">C-54890</div></div>
+                  <div class="field-item"><span class="field-label">فرع الاستثمار التابع له</span><div class="field-value">القاهرة</div></div>
+                  <div class="field-item"><span class="field-label">النشاط</span><div class="field-value">تطوير عمراني</div></div>
+                  <div class="field-item"><span class="field-label">وضع الشركة</span><div class="field-value"><span class="badge badge-success">نشطة</span></div></div>
+                  <div class="field-item"><span class="field-label">تصنيف الشركة / السوق</span><div class="field-value">سوق رئيسي</div></div>
+                  <div class="field-item"><span class="field-label">نوع الاكتتاب</span><div class="field-value">عام</div></div>
+                  <div class="field-item"><span class="field-label">التليفون</span><input type="text" class="form-control" value="٠٢٢٣٤٥٦٧٨٩"></div>
+                  <div class="field-item"><span class="field-label">الفاكس</span><input type="text" class="form-control" value="٠٢٢٣٤٥٦٧٨٨"></div>
+                  <div class="field-item"><span class="field-label">الرقم الضريبى</span><div class="field-value">٢٤٥-٣٩٢-١٠٢</div></div>
+                </div>
+                <div class="divider"></div>
+                <div class="section-title">المستندات</div>
+                <div class="field-grid">
+                  <div class="field-item">
+                    <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">النظام الاساسي للشركه / عقد الشركة</span></span></label>
+                  </div>
+                  <div class="field-item">
+                    <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">التعديلات علي الشركة</span></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delegate Data Tab (Employee) -->
+          <div class="tab-content-panel" id="emp-comp-delegate">
+            <div class="card mb-24">
+              <div class="card-header">
+                <h3><span class="header-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>بيانات المفوض</h3>
+                <span class="badge badge-primary">EF - CSP</span>
+              </div>
+              <div class="card-body">
+                <div class="field-grid">
+                  <div class="field-item"><span class="field-label">نوع التفويض</span><div class="field-value text-primary">تفويض للتعامل مع المقاصة</div></div>
+                  <div class="field-item"><span class="field-label">اسم المفوض</span><div class="field-value">أحمد محمد عبد الرحمن</div></div>
+                  <div class="field-item"><span class="field-label">الصفة</span><div class="field-value">مفوض</div></div>
+                  <div class="field-item"><span class="field-label">نوع إثبات الشخصية</span><div class="field-value">بطاقة رقم قومي</div></div>
+                  <div class="field-item"><span class="field-label">رقم البطاقة / جواز السفر</span><div class="field-value">٢٨٥٠١١٢٣٤٠٠٥٧٣</div></div>
+                  <div class="field-item"><span class="field-label">تليفون مقدم الطلب</span><div class="field-value">٠١٠١٢٣٤٥٦٧٨</div></div>
+                </div>
+                <div class="divider"></div>
+                <div class="section-title">المرفقات الخاصة بالمفوض</div>
+                <div class="field-grid">
+                  <div class="field-item">
+                    <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="att-info"><span class="att-name">تحقيق الشخصية (صورة الرقم القومي)</span></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employee View of Increases (Tree) -->
+        <div class="card mb-24">
+          <div class="card-header"><h3>بيانات طلب التسوية (الزيادات)</h3><span class="badge badge-info">للاطلاع فقط</span></div>
+          <div class="card-body" style="padding: 16px 24px;">
+            <div class="increase-tree" id="emp-increase-tree">
+              <!-- Increase 1 -->
+              <div class="increase-node">
+                <div class="node-card">
+                  <div class="node-header" onclick="toggleNode(this)">
+                    <h4><span class="node-badge">زيادة ١</span>البيانات والمرفقات (الأقدم)</h4>
+                    <span class="node-date">١٥ مارس ٢٠١٥</span>
+                    <svg class="toggle-icon collapsed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                  <div class="node-body collapsed" style="max-height: 0; opacity: 0;">
+                    <div class="node-body-content">
+                      <div class="field-grid mb-16">
+                        <div class="field-item"><span class="field-label">طريقة الزيادة</span><div class="field-value">تأسيس (نقدي)</div></div>
+                        <div class="field-item"><span class="field-label">قيمة الزيادة</span><div class="field-value">١٠,٠٠٠,٠٠٠ جنيه</div></div>
+                        <div class="field-item"><span class="field-label">رأس المال بعد الزيادة</span><div class="field-value">١٠,٠٠٠,٠٠٠ جنيه</div></div>
+                      </div>
+                      <div class="section-title">المرفقات</div>
+                      <div class="field-grid">
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">محضر الجمعية</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">العقد المعدل</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">طلب قيد الزيادة</span></span></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Increase 2 -->
+              <div class="increase-node">
+                <div class="node-card">
+                  <div class="node-header" onclick="toggleNode(this)">
+                    <h4><span class="node-badge" style="background: rgba(201,168,76,0.1); color: var(--gold-dark);">زيادة ٢</span>البيانات والمرفقات (الأحدث)</h4>
+                    <span class="node-date">١٢ مايو ٢٠٢٠</span>
+                    <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                  <div class="node-body">
+                    <div class="node-body-content">
+                      <div class="field-grid mb-16">
+                        <div class="field-item"><span class="field-label">طريقة الزيادة</span><div class="field-value">أرباح مرحلة</div></div>
+                        <div class="field-item"><span class="field-label">قيمة الزيادة</span><div class="field-value">٤٠,٠٠٠,٠٠٠ جنيه</div></div>
+                        <div class="field-item"><span class="field-label">رأس المال بعد الزيادة</span><div class="field-value">٥٠,٠٠٠,٠٠٠ جنيه</div></div>
+                      </div>
+                      <div class="section-title">المرفقات</div>
+                      <div class="field-grid">
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">محضر الجمعية</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">العقد المعدل</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">خطاب الرقابة المالية بالزيادة</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">قائمة المساهمين</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">طلب قيد الزيادة</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">السجل التجارى</span></span></label>
+                        <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">الشهادة البنكية</span></span></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-24" style="border: 2px solid var(--gold);">
+          <div class="card-header" style="background: rgba(201,168,76,0.1);"><h3>إجراء الموظف</h3></div>
+          
+          <div class="card-body" id="emp-action-buttons">
+            <div style="display: flex; gap: 16px;">
+              <button class="btn btn-success btn-lg" id="emp-btn-approve" style="flex: 1;">موافق (طلب استكمال)</button>
+              <button class="btn btn-outline btn-lg" id="emp-btn-return" style="flex: 1; border-color: var(--danger); color: var(--danger);">استيفاء الملاحظات</button>
+            </div>
+          </div>
+
+          <!-- Approve Flow -->
+          <div class="card-body hidden" id="emp-action-approve-flow" style="border-top: 1px solid var(--border-light);">
+            <div class="field-grid">
+              <div class="field-item">
+                <span class="field-label">الرسوم المستحقة</span>
+                <div class="field-value" style="font-size: 1.25rem; font-weight: 800; color: var(--primary);">٥,٠٠٠ جنيه</div>
+              </div>
+              <div class="field-item">
+                <span class="field-label">حالة الدفع</span>
+                <label class="checkbox-wrapper" style="margin-top: 8px;">
+                  <input type="checkbox" id="emp-paid-check">
+                  <span class="checkbox-custom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="checkbox-label" style="font-weight: 600;">تم سداد الرسوم بنجاح</span>
+                </label>
+              </div>
+            </div>
+            
+            <div id="emp-upload-letter-section" class="hidden" style="margin-top: 24px; animation: fadeIn 0.4s ease;">
+              <div class="section-title">إرفاق المستندات النهائية</div>
+              <div class="field-grid">
+                <div class="field-item full-width">
+                  <label class="attachment-field has-file"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span><span class="att-info"><span class="att-name">رفع خطاب مصر المقاصة</span></span></label>
+                </div>
+              </div>
+              
+              <div class="divider"></div>
+              <label class="checkbox-wrapper">
+                <input type="checkbox" id="emp-final-complete-check">
+                <span class="checkbox-custom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="checkbox-label" style="color: var(--success); font-weight: 700;">تم استكمال التسوية — تحديث رأس المال لدى المقاصة</span>
+              </label>
+              
+              <div id="emp-final-result" class="hidden mt-16" style="margin-top: 16px;"></div>
+            </div>
+          </div>
+
+          <!-- Return Flow -->
+          <div class="card-body hidden" id="emp-action-return-flow" style="border-top: 1px solid var(--border-light);">
+            <div class="field-grid">
+              <div class="field-item full-width">
+                <span class="field-label">ملاحظات الاستيفاء (أسباب الإرجاع)</span>
+                <textarea class="form-control" id="emp-notes" rows="4" placeholder="اكتب الملاحظات التي يجب على المستثمر استيفاؤها..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top: 16px; text-align: left;">
+              <button class="btn btn-outline" id="emp-btn-cancel-return">إلغاء</button>
+              <button class="btn btn-primary" id="emp-btn-send-return" style="margin-right: 8px;">إرسال الاستيفاء</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN: COMING SOON -->
+      <div id="screen-coming-soon" class="screen">
+        <div class="page-header">
+          <h1>خدمات الشركة</h1>
+          <p>بوابة الخدمات الخاصة بالشركات المكتملة التسوية</p>
+        </div>
+        <div class="card mb-24" style="text-align: center; padding: 60px 20px;">
+          <div class="logo-icon" style="margin: 0 auto 24px; width: 80px; height: 80px; background: var(--success-bg); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h2 style="color: var(--success); margin-bottom: 32px; font-weight: 800;">حالة الشركة مكتملة ولا توجد تسويات مطلوبة</h2>
+          
+          <div class="card" style="display: inline-block; padding: 32px; border: 2px dashed var(--gold); background: rgba(201,168,76,0.05); max-width: 500px;">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--gold)" stroke-width="1.5" style="margin-bottom: 16px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <h3 style="color: var(--gold-dark); margin-bottom: 12px; font-size: 1.25rem;">خدمة اجتماع مجلس الإدارة لرفع رأس المال</h3>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">هذه الخدمة ستتيح لك إدارة اجتماعات مجلس الإدارة الخاصة برفع رأس المال بكل سهولة وبشكل إلكتروني كامل.</p>
+            <span class="badge badge-warning" style="font-size: 1rem; padding: 8px 24px;">قريباً (Coming Soon)</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- SIJIL MODAL -->
+<div class="modal-overlay" id="sijil-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 style="color: var(--primary);">البحث عن شركة</h3>
+    </div>
+    <div class="modal-body" style="padding-top: 16px;">
+      <p style="margin-bottom: 16px; color: var(--text-secondary); font-size: 0.9375rem;">برجاء إدخال رقم السجل التجاري للشركة للتحقق من حالة التسوية الخاصة بها.</p>
+      <div class="form-group">
+        <label>رقم السجل التجاري</label>
+        <input type="text" class="form-control" id="sijil-input" placeholder="مثال: اكتب 123 لشركة مكتملة، أو أي رقم لشركة غير مكتملة">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-block" id="btn-search-sijil">بحث</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">تأكيد</h3>
+      <button class="btn btn-icon btn-outline" onclick="closeModal()" style="border:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body"><p id="modal-message">هل أنت متأكد؟</p></div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" id="modal-confirm-btn">تأكيد</button>
+      <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
