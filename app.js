@@ -373,4 +373,15 @@
     }
   });
 
+  // MCDR Shareholders Table Toggle
+  $('#btn-toggle-mcdr-inv')?.addEventListener('click', function() {
+    const table = $('#mcdr-shareholders-table-inv');
+    if (table) table.classList.toggle('hidden');
+  });
+  
+  $('#btn-toggle-mcdr-emp')?.addEventListener('click', function() {
+    const table = $('#mcdr-shareholders-table-emp');
+    if (table) table.classList.toggle('hidden');
+  });
+
 })();
