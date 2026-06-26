@@ -152,6 +152,53 @@
                     <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">التعديلات على الشركة</span></span></label>
                   </div>
                 </div>
+
+                <div class="divider"></div>
+                <div class="section-title">بيانات سجل المساهمين (مصر المقاصة)</div>
+                <div class="field-grid">
+                  <div class="field-item full-width">
+                    <label class="attachment-field has-file" id="btn-toggle-mcdr-inv" style="cursor: pointer; border-color: var(--gold); background: rgba(201,168,76,0.05);">
+                      <span class="att-icon" style="color: var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                      <span class="att-info">
+                        <span class="att-name" style="color: var(--gold-dark); font-weight: 700;">قائمة المساهمين - مصر المقاصة.pdf</span>
+                        <span class="att-hint" style="color: var(--primary);">اضغط لعرض السجل</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="table-responsive hidden" id="mcdr-shareholders-table-inv" style="overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-top: 16px; animation: fadeIn 0.4s ease;">
+                  <table class="table" style="width: 100%; text-align: right; border-collapse: collapse; font-family: 'Tajawal', sans-serif;">
+                    <thead style="background: rgba(17, 42, 70, 0.04); color: var(--text-muted); font-weight: 800; font-size: 0.875rem;">
+                      <tr>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">اسم المساهم</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">الجنسية</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">عدد الأسهم</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">نسبة المساهمة</th>
+                      </tr>
+                    </thead>
+                    <tbody style="font-size: 0.9375rem; font-weight: 600; color: var(--text);">
+                      <tr style="border-bottom: 1px solid var(--border-light);">
+                        <td style="padding: 16px;">أحمد عبد الرحمن سالم</td>
+                        <td style="padding: 16px;">مصري</td>
+                        <td style="padding: 16px;">٥٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-success">٢٥٪</span></td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid var(--border-light); background: rgba(17, 42, 70, 0.01);">
+                        <td style="padding: 16px;">شركة مجموعة الاستثمارات الكبرى</td>
+                        <td style="padding: 16px;">سعودي</td>
+                        <td style="padding: 16px;">١,٠٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-primary">٥٠٪</span></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 16px;">منى محمود علي</td>
+                        <td style="padding: 16px;">مصري</td>
+                        <td style="padding: 16px;">٥٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-warning">٢٥٪</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -346,6 +393,53 @@
                   <div class="field-item">
                     <label class="attachment-field readonly"><span class="att-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span class="att-info"><span class="att-name">التعديلات علي الشركة</span></span></label>
                   </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="section-title">بيانات سجل المساهمين (مصر المقاصة)</div>
+                <div class="field-grid">
+                  <div class="field-item full-width">
+                    <label class="attachment-field has-file" id="btn-toggle-mcdr-emp" style="cursor: pointer; border-color: var(--gold); background: rgba(201,168,76,0.05);">
+                      <span class="att-icon" style="color: var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                      <span class="att-info">
+                        <span class="att-name" style="color: var(--gold-dark); font-weight: 700;">قائمة المساهمين - مصر المقاصة.pdf</span>
+                        <span class="att-hint" style="color: var(--primary);">اضغط لعرض السجل</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="table-responsive hidden" id="mcdr-shareholders-table-emp" style="overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-top: 16px; animation: fadeIn 0.4s ease;">
+                  <table class="table" style="width: 100%; text-align: right; border-collapse: collapse; font-family: 'Tajawal', sans-serif;">
+                    <thead style="background: rgba(17, 42, 70, 0.04); color: var(--text-muted); font-weight: 800; font-size: 0.875rem;">
+                      <tr>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">اسم المساهم</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">الجنسية</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">عدد الأسهم</th>
+                        <th style="padding: 16px; border-bottom: 2px solid var(--border-light);">نسبة المساهمة</th>
+                      </tr>
+                    </thead>
+                    <tbody style="font-size: 0.9375rem; font-weight: 600; color: var(--text);">
+                      <tr style="border-bottom: 1px solid var(--border-light);">
+                        <td style="padding: 16px;">أحمد عبد الرحمن سالم</td>
+                        <td style="padding: 16px;">مصري</td>
+                        <td style="padding: 16px;">٥٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-success">٢٥٪</span></td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid var(--border-light); background: rgba(17, 42, 70, 0.01);">
+                        <td style="padding: 16px;">شركة مجموعة الاستثمارات الكبرى</td>
+                        <td style="padding: 16px;">سعودي</td>
+                        <td style="padding: 16px;">١,٠٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-primary">٥٠٪</span></td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 16px;">منى محمود علي</td>
+                        <td style="padding: 16px;">مصري</td>
+                        <td style="padding: 16px;">٥٠٠,٠٠٠ سهم</td>
+                        <td style="padding: 16px;"><span class="badge badge-warning">٢٥٪</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
